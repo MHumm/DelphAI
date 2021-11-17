@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D7819ED0-9EF1-402F-952E-416FFF004A12}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Source\DelphAi.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="UnitTests\DelphAiTests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DelphAi">
+        <MSBuild Projects="Source\DelphAi.dproj"/>
+    </Target>
+    <Target Name="DelphAi:Clean">
+        <MSBuild Projects="Source\DelphAi.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphAi:Make">
+        <MSBuild Projects="Source\DelphAi.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DelphAiTests">
+        <MSBuild Projects="UnitTests\DelphAiTests.dproj"/>
+    </Target>
+    <Target Name="DelphAiTests:Clean">
+        <MSBuild Projects="UnitTests\DelphAiTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphAiTests:Make">
+        <MSBuild Projects="UnitTests\DelphAiTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DelphAi;DelphAiTests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DelphAi:Clean;DelphAiTests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DelphAi:Make;DelphAiTests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
